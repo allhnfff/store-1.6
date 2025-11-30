@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H&T Store - Premium Digital Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #acacac;
+            --primary-dark: #f8f8f8;
+            --secondary: #00eaff;
+            --accent: #000000;
+            --bg: #35daff;
+            --bg-light: #448cff;
+            --text: #f8fafc;
+            --text-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f172a, #000000, #0c1730);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            top: 10%;
+            left: 10%;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape3 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent);
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 50px); }
+            50% { transform: translate(-30px, 80px); }
+            75% { transform: translate(-80px, -50px); }
+        }
+
+        header {
+            background: rgba(44, 146, 186, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(5, 125, 117, 0.524);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(90, 46, 193, 0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(6, 57, 135, 0.74), rgba(6, 94, 157, 0.2));
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(81, 15, 233, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(22, 94, 161, 0.3);
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: rgba(38, 13, 94, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1.2rem 3.5rem;
+            border: 2px solid rgba(18, 167, 172, 0.3);
+            border-radius: 50px;
+            font-size: 1rem;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(39, 6, 115, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s;
+        }
+
+        .clear-search:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .clear-search.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-grid {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .product-grid::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .product-grid::-webkit-scrollbar-track {
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .product-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        .product-card {
+            min-width: 340px;
+            background: rgba(131, 179, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            transition: all 0.4s;
+            scroll-snap-align: start;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(46, 16, 118, 0.4);
+            border-color: var(--primary);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .product-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            position: relative;
+        }
+
+        .product-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgb(67, 46, 255));
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-logo {
+            transform: scale(1.1);
+        }
+
+        .product-icon i {
+            font-size: 4rem;
+            color: white;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+
+        .product-body {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-list {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(68, 88, 238, 0.1);
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(92, 120, 246, 0.1);
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .price-value {
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.4s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(96, 80, 240, 0.5);
+        }
+
+        .contact-section {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(92, 172, 246, 0.2);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(92, 128, 246, 0.2);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(51, 9, 148, 0.3);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(92, 92, 246, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(92, 202, 246, 0.2);
+            color: var(--text-light);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem;
+            display: none;
+        }
+
+        .no-results.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero h1 { 
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-badges {
+                gap: 1rem;
+            }
+            
+            .badge {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-container {
+                padding: 1rem 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            nav ul { 
+                gap: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .search-box {
+                padding: 1rem 3rem;
+                font-size: 0.95rem;
+            }
+            
+            .product-grid {
+                gap: 1rem;
+                padding: 0 0.5rem 1.5rem;
+            }
+            
+            .product-card { 
+                min-width: 280px;
+                max-width: 320px;
+            }
+            
+            .product-icon {
+                padding: 2rem;
+                min-height: 150px;
+            }
+            
+            .product-logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .product-body {
+                padding: 1.5rem;
+            }
+            
+            .product-title {
+                font-size: 1.2rem;
+            }
+            
+            .product-description {
+                font-size: 0.9rem;
+            }
+            
+            .price-list {
+                padding: 1rem;
+            }
+            
+            .price-item {
+                padding: 0.6rem 0;
+            }
+            
+            .price-label,
+            .price-value {
+                font-size: 0.9rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .contact-card p {
+                font-size: 0.9rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            footer {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            
+            .contact-section {
+                padding: 3rem 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            
+            .product-card {
+                min-width: 260px;
+            }
+            
+            nav ul {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-store"></i> H&T Store
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Digital Products</h1>
+            <p>Dapatkan akses ke berbagai layanan premium dengan harga terjangkau, kami juga menyediakan jasa joki ppt, infografis, logo, banner, poster, dan website sederhana</p>
+            <div class="hero-badges">
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>100% Terpercaya</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Respon Cepat</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-award"></i>
+                    <span>Sejak 2023</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="products">
+        <h2 class="section-title">Produk Tersedia</h2>
+        <p class="section-subtitle">Pilih produk digital premium sesuai kebutuhan Anda</p>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-box" id="searchInput" placeholder="Cari produk favorit Anda...">
+            <button class="clear-search" id="clearSearch">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+        
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search"></i>
+            <h3>Produk tidak ditemukan</h3>
+            <p>Coba cari dengan kata kunci lain</p>
+        </div>
+    </div>
+
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <p class="section-subtitle">Pilih channel komunikasi yang Anda sukai</p>
+            
+            <div class="contact-grid">
+                <a href="https://wa.me/6285841218112" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3>WhatsApp Chat</h3>
+                        <p>Respon cepat 24/7</p>
+                    </div>
+                </a>
+
+                <a href="https://chat.whatsapp.com/C9h8uAhCujyF5Wa4d3XzmS" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h3>Group WhatsApp</h3>
+                        <p>Bergabung dengan komunitas</p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/lyly_st0ree" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div>
+                        <h3>Instagram</h3>
+                        <p>@lyly_st0ree</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/lylyst0ree" class="contact-card" target="_blank">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div>
+                        <h3>Telegram</h3>
+                        <p>Lihat testimoni</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-store"></i> H&T Store</h3>
+                <p>Menyediakan berbagai produk digital premium dengan harga terjangkau dan layanan terpercaya sejak 2023.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Produk Populer</h3>
+                <ul>
+                    <li><a href="#products">Canva Pro</a></li>
+                    <li><a href="#products">Netflix Premium</a></li>
+                    <li><a href="#products">ChatGPT Premium</a></li>
+                    <li><a href="#products">YouTube Premium</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Keunggulan Kami</h3>
+                <ul>
+                    <li><i class="fas fa-check"></i> Harga Terjangkau</li>
+                    <li><i class="fas fa-check"></i> Garansi Produk</li>
+                    <li><i class="fas fa-check"></i> Respon Cepat</li>
+                    <li><i class="fas fa-check"></i> Amanah & Terpercaya</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023-2025 H&T Store. Made with <i class="fas fa-heart" style="color: #ec4899;"></i> in Indonesia</p>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            {title: 'Canva Pro', desc: 'Desain grafis profesional', logo: 'https://freepnglogo.com/images/all_img/1691829400logo-canva-png.png', prices: [['1 Bulan', '1.000'], ['3 Bulan', '3.000'], ['1 Tahun', '9.000'], ['Lifetime', '12.000']]},
+            {title: 'Jasa Design/Joki', desc: 'Jasa Yang Mempermudah Kalian Jika Tugas Menumpuk', logo: 'https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/199815619/original/f3246834c4767a44a7046affac52ca7e4a60578e/design-unique-brand-build-identity-logo.jpg', prices: [['PPT Per Slide', '2.000'],['1 Poster', '18.000'], ['1 Banner', '18.000'], ['1 Logo', '18.000'], ['Web Sederhana', '40.000']]},
+            {title: 'Netflix Premium', desc: 'Streaming film dan series 4K', logo: 'https://images.ctfassets.net/wt70guc1rpin/4J5l85tSYUWxfT0zj90Wai/06c55d490990e65f62d0e8384526e09c/letterform_logo.jpeg', prices: [['Semipriv', '27.000/bln'], ['1p1u', '23.000/bln'], ['1p2u', '14.000/bln']]},
+            {title: 'CapCut Premium', desc: 'Edit video profesional', logo: 'https://vectorseek.com/wp-content/uploads/2023/07/png-capcut-logo.png', prices: [['1 Bulan Private', '12.000'], ['1 Bulan 2u', '7.000'], ['7 Hari Private', '4.000']]},
+            {title: 'ChatGPT Premium', desc: 'AI dengan model terbaru', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', prices: [['Business 7 hari', '10.000'], ['Business 1 Bulan', '24.000'], ['BUssines 3 Hari', '6.000']]},
+            {title: 'Gemini Pro + 2 Drive TB', desc: 'AI dengan model VEO terbaru', logo: 'https://rocket.domains/wp-content/uploads/2024/03/Gemini-AI-Logo.png', prices: [['Gemini Pro 1 thn', '13.000'], ['Gemini Pro 1 Bulan', '8.000']]},
+            {title: 'YouTube Premium', desc: 'Tanpa iklan & offline', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg', prices: [['Indplan', '5.000/bln'], ['Family Slot', '2.000/bln']]},
+            {title: 'Dramabox', desc: 'Drama favorit tanpa batas', logo: 'https://play-lh.googleusercontent.com/dYAF42EhNGgGhC7nLHNSZkWs11W5Dv0mRWZBv6IgLDTh3l8eolsjeAVGg-HVHt9YWyA', prices: [['1 Bulan Sharing', '10.000']]},
+            {title: 'Alight Motion', desc: 'Edit video animasi profesional', logo: 'https://freepnglogo.com/images/all_img/1691819804alight-motion-logo-png.png', prices: [['1 Tahun Sharing', '1.000'], ['1 Tahun Private', '3.000']]},
+            {title: 'Apple Music', desc: 'Streaming musik berkualitas', logo: 'https://freepnglogo.com/images/all_img/apple-music-logo-png-e0aa.png', prices: [['1 Bulan famplan', '6.000'], ['1 bulan head', '12.000']]},
+            {title: 'Spotify Premium', desc: 'Musik tanpa iklan', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg', prices: [['1 Bulan Indplan', '15.000'], ['1 Bulan Family', '16.000']]},
+            {title: 'VIU Premium', desc: 'Drama Asia terlengkap', logo: 'https://is1-ssl.mzstatic.com/image/thumb/Purple124/v4/7d/5b/e9/7d5be933-a76a-cce4-3380-5360f16e444d/AppIcon-0-0-1x_U007emarketing-0-0-0-4-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg', prices: [['1 Bulan Private', '1.000'], ['1 Tahun Private', '5.000'], ['Lifetime', '7.000']]},
+            {title: 'WeTV Premium', desc: 'Drama & variety show', logo: 'https://tse3.mm.bing.net/th/id/OIP.E_VVzxIU-Q2P_uBbhPJbEAHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3', prices: [['1 Bulan 6u', '6.000'], ['1 Bulan 3u', '13.000'], ['1 Bulan Private', '30.000']]},
+            {title: 'Bstation Premium', desc: 'Streaming Anime', logo: 'https://play-lh.googleusercontent.com/nug7F0n-jWMpAWLaU7Qi1kuTIYjrAtUJmZd5FW4mEyspYR7-zGa-3_fwnYkPgyzHozE3', prices: [['1 Bulan Sharing', '5.000'], ['1 Tahun Sharing', '10.000']]},
+            {title: 'Microsoft 365', desc: 'Editing makalah dengan lebih leluasa', logo: 'https://iconlogovector.com/uploads/images/2023/03/lg-0438cfb397d95751203ce73d7a6dcd3e30.jpg', prices: [['1 Bulan Acc Seller', '7.000'], ['1 Bulan Acc buyer', '9.000']]},
+            {title: 'Zoom Premium', desc: 'Zoom dengan lebih profesional', logo: 'https://wallpapers.com/images/hd/zoom-pictures-xyphlin0b1cgb1fd.jpg', prices: [['14 hari', '5.000'],['1 Bulan Private', '10.000']]},
+            {title: 'iQIYI Premium', desc: 'Konten Asia berkualitas', logo: 'https://play-lh.googleusercontent.com/L40FnQ8nF8zRtUdALz9b23JirsxYA5-0_fkRUlFBMymud09ctBCFrNui4l-ES_V6Uw', prices: [['1 Bulan Standar', '4.000'], ['1 Tahun Standar', '10.000'], ['1 Bulan Premium', '5.000'], ['1 Tahun Premium', '11..000']]},
+            {title: 'Prime Video', desc: 'Amazon Original', logo: 'https://www.altibox.no/wp-content/uploads/2022/08/prime-vidoe.png', prices: [['1 Bulan Sharing 3u', '6.000'], ['1 Bulan Private', '12.000']]},
+            {title: 'Picsart Premium', desc: 'Edit foto & desain', logo: 'https://vectorseek.com/wp-content/uploads/2023/08/Picsart-Icon-Logo-Vector.svg-.png', prices: [['1 Bulan Sharing', '3.500'], ['1 Bulan Private', '7.000']]},
+            {title: 'Youku Premium', desc: 'Streaming dari China', logo: 'https://play-lh.googleusercontent.com/tCS-GBn1rQC-3gd84ssXFTmBFl_8VAYnj8l4BDrQdsCeDkddcbhLxDlyr5shrMC9r5I=w220', prices: [['1 Bulan', '5.000'], ['3 Bulan', '8.000'], ['1 Tahun', '10.000']]},
+            {title: 'Moviebox Premium', desc: 'Film & series lengkap', logo: 'https://4.bp.blogspot.com/-VwY4NjwtT8c/Ur2z9FxhEcI/AAAAAAAADV4/aOWTN6piF-I/s1600/Movie+Box.png', prices: [['1 Bulan Android', '5.000'], ['1 Bulan iOS', '6.000'], ['1 Tahun Android', '10.000']]},
+            {title: 'Wink Premium', desc: 'Platform hiburan', logo: 'https://tse4.mm.bing.net/th/id/OIP.SsLG2P4ZubuTFF_X-LC0jQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3', prices: [['7 Hari 2u', '6.000'], ['7 Hari Private', '10.000']]},
+            {title: 'Fizzo Premium', desc: 'hiburan', logo: 'https://tse2.mm.bing.net/th/id/OIP.jAyURSHnB5HUPvBmcu14JgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3', prices: [['1 Bulan Sharing', '5.000']]},
+            {title: 'Getcontact Premium', desc: 'Cek Nomer Dan Terhindar Dari Penipuan', logo: 'https://free-png.ru/wp-content/uploads/2021/11/free-png.ru-488.png', prices: [['1 Bulan', '7.000'], ['Cek 1 Nomer', '1000']]},
+            {title: 'Wattpad Premium', desc: 'Baca cerita tanpa iklan', logo: 'https://cdn-icons-png.flaticon.com/512/3992/3992005.png', prices: [['1 Bulan', '6.000'], ['1 Tahun', '10.000']]},
+            {title: 'Vidio Premium', desc: 'TV & sport Indonesia', logo: 'https://cdn.freelogovectors.net/wp-content/uploads/2021/12/vidio-logo-freelogovectors.net_-400x400.png', prices: [['1 Bulan 2u All Device', '20.000'], ['1 Bulan Private All Device', '34.000'], ['1 Bulan 2u Mobile', '14.000'], ['1 Bulan Private Mobile', '22.000'], ['Only TV 1 Tahun', '6.000']]},
+            {title: 'Loklok Premium', desc: 'Drama & film Asia', logo: 'https://loklokapkk.com/wp-content/uploads/2024/12/logo-table-new-1.webp', prices: [['1 Bulan 3u Android', '20.000'], ['1 Bulan 5u TV', '15.500']]},
+            {title: 'HBO Max', desc: 'Series blockbuster', logo: 'https://www.gloryofthesnow.com/wp-content/uploads/2022/05/HBO-Max-Black.png', prices: [['1 Bulan Ultimate Sharing', '17.000'], ['1 Bulan Standar Sharing', '13.000']]},
+            {title: 'Wibuku Premium', desc: 'Streaming Anime', logo: 'https://play-lh.googleusercontent.com/EAVnwk0BS5chgGbygHiIYu2w5OLx54GdXDZQBsdLM4rU_xZ86fPjBmLAljN9wARvmvxA', prices: [['1 Tahun Sharing', '10.500']]},
+            {title: 'Lightroom Premium', desc: 'Edit foto profesional', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg', prices: [['1 Tahun Sharing', '15.000']]},
+            {title: 'Meitu Premium', desc: 'Edit foto dengan AI', logo: 'https://getmodsapk.com/storage/Meitu%20MOD%20APK0.png', prices: [['1 Bulan 3u', '15.000']]},
+            {title: 'Vision Premium', desc: 'Sport & entertainment', logo: 'https://mir-s3-cdn-cf.behance.net/projects/max_808/35b05093008279.Y3JvcCwxNDg2LDExNjIsNDk2LDUxNQ.jpg', prices: [['Timnas & Bein Pay TV 1 Bulan', '15.000'], ['Ultimate Premium', '55.000']]}
+        ];
+
+        const grid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearch');
+        const noResults = document.getElementById('noResults');
+
+        function renderProducts() {
+            grid.innerHTML = products.map((p, i) => `
+                <div class="product-card" style="animation-delay: ${i * 0.1}s">
+                    <div class="product-icon">
+                        ${p.logo ? 
+                            `<img src="${p.logo}" alt="${p.title}" class="product-logo" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-${p.icon || 'play'}\\'></i>'">` : 
+                            `<i class="fas fa-${p.icon || 'play'}"></i>`
+                        }
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-title">${p.title}</h3>
+                        <p class="product-description">${p.desc}</p>
+                        <div class="price-list">
+                            ${p.prices.map(pr => `
+                                <div class="price-item">
+                                    <span class="price-label">${pr[0]}</span>
+                                    <span class="price-value">Rp ${pr[1]}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <a href="https://wa.me/6283168725825?text=Halo,%20saya%20mau%20order%20${encodeURIComponent(p.title)}" class="btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order Sekarang
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function search() {
+            const term = searchInput.value.toLowerCase();
+            clearBtn.classList.toggle('active', term.length > 0);
+            
+            const cards = grid.querySelectorAll('.product-card');
+            let visible = 0;
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const match = text.includes(term);
+                card.classList.toggle('hidden', !match);
+                if (match) visible++;
+            });
+            
+            noResults.classList.toggle('active', visible === 0 && term.length > 0);
+        }
+
+        searchInput.addEventListener('input', search);
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            search();
+            searchInput.focus();
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                search();
+            }
+        });
+
+        renderProducts();
+    </script>
+
+</body>
+</html>
